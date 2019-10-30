@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>@yield('title') </title>
 		<base href="{{asset('')}}"/> 
 		<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
@@ -43,10 +43,11 @@
 		<script src="assets/dest/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 		<script src="assets/dest/js/waypoints.min.js"></script>
 		<script src="assets/dest/js/wow.min.js"></script>
+
 		
 		<!--customjs-->
 		@yield('script')
-		<script src="assets/dest/js/jquery.validate.min.js"></script>
+		<script src="assets/dest/js/custom-validate.js"></script>
 		<script src="assets/dest/js/custom2.js"></script>
 		<script src="assets/dest/js/toastr.min.js"></script>
 		<script>

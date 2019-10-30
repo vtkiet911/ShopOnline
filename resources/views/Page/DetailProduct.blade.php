@@ -58,7 +58,7 @@
 										<option value="{{ $i }}">{{ $i }}</option>
 									@endfor
 								</select>
-								<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+								<a class="add-to-cart" href="{{ route('addtocart',$product->id) }}"><i class="fa fa-shopping-cart"></i></a>
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -105,8 +105,8 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="{{ route('typeproduct',$otherProduct->id) }}">Chi tiết <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-cart pull-left" href="{{ route('addtocart',$otherProduct->id) }}"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="{{ route('detailproduct',$otherProduct->id) }}">Chi tiết <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>

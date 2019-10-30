@@ -21,45 +21,45 @@
 	<div class="container">
 		<div id="content">
 			
-			<form class="beta-form-checkout" id='formcheckout'>
+			<form class="beta-form-checkout" id='formcheckout' action="{{ route('CheckOutRequest') }}" method="POST">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Đặt hàng</h4>
 						<div class="space20">&nbsp;</div>
 
-						<div class="form-block" id="group_name">
+						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_name">
 							<label for="name">Họ tên</label>
-							<input type="text" id="name" name="name" placeholder="Họ tên">
+							<input type="text" class=" col-lg-12 col-md-12 col-sm-12" id="name" name="name" placeholder="Họ và tên">
 						</div>
-						<div class="form-block">
+						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0">
 							<label>Giới tính </label>
 							<input id="gender" type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
 							<input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
 										
 						</div>
 
-						<div class="form-block">
+						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_email">
 							<label for="email">Email</label>
-							<input type="email" id="email" required placeholder="expample@gmail.com">
+							<input type="email" id="email" class=" col-lg-12 col-md-12 col-sm-12 " placeholder="expample@gmail.com">
 						</div>
 
-						<div class="form-block">
+						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_adress">
 							<label for="adress">Địa chỉ</label>
-							<input type="text" id="adress" placeholder="Street Address" required>
+							<input type="text" id="adress" class=" col-lg-12 col-md-12 col-sm-12 " placeholder="Địa chỉ nhận hàng" >
 						</div>
 						
 
-						<div class="form-block">
+						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_phone">
 							<label for="phone">Điện thoại</label>
-							<input type="text" id="phone" required>
+							<input type="text" class=" col-lg-12 col-md-12 col-sm-12 " id="phone" >
 						</div>
 						
-						<div class="form-block">
+						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0">
 							<label for="notes">Ghi chú</label>
-							<textarea id="notes"></textarea>
+							<textarea id="notes" class=" col-lg-12 col-md-12 col-sm-12 "></textarea>
 						</div>
 					</div>
-					<div class="text-center"><a class="beta-btn primary" id="BtnCheckOut" type="button">Đặt hàng <i class="fa fa-chevron-right"></i></a></div>
 					<div class="col-sm-6">
 						<div class="your-order">
 							<div class="your-order-head"><h5>Đơn hàng của bạn</h5></div>
@@ -114,8 +114,7 @@
 									
 								</ul>
 							</div>
-
-							{{-- <div class="text-center"><a class="beta-btn primary" id="BtnCheckOut" type="button">Đặt hàng <i class="fa fa-chevron-right"></i></a></div> --}}
+							<div class="text-center"><button class="beta-btn primary" id="BtnCheckOut" type="button">Đặt hàng <i class="fa fa-chevron-right"></i></button></div>
 						</div> <!-- .your-order -->
 					</div>
 				</div>

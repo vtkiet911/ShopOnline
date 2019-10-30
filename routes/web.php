@@ -51,6 +51,12 @@ Route::get('ShoppingCart',[
 	'uses' => 'PageController@ShoppingCart'
 ]);
 
+Route::post('CheckOutRequest',[
+	'as' => 'CheckOutRequest',
+	'uses' => 'PageController@CheckOutRequest'
+]);
+
+
 Route::get('deletesession',[
 	'as' => 'deletesession',
 	'uses' => 'PageController@DeleteSession'

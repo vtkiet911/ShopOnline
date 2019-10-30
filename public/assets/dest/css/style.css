@@ -974,8 +974,13 @@ width:200px;
 font-weight:lighter
 }
 
+.form-block label.validate{
+width: auto;
+font-weight:lighter
+}
+
+
 .form-block input,.form-block select,.beta-form-checkout textarea {
-width:60%;
 overflow:hidden
 }
 
