@@ -10,7 +10,54 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('',[
+// 	'as' => '',
+// 	'uses' => ''
+// ]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('', [
+	'as' => 'home',
+	'uses' => 'SlideController@index'
+]);
+
+Route::get('/typeproduct/{id}',[
+	'as' => 'typeproduct',
+	'uses' => 'TypeProductController@GetTypeProducts'
+]);
+
+Route::get('detailproduct/{id}',[
+	'as' => 'detailproduct',
+	'uses' => 'ProductController@GetDetailProduct'
+]);
+
+Route::get('GetAllCart',[
+	'as' => 'GetAllCart',
+	'uses' => 'PageController@GetAllCart'
+]);
+
+Route::get('AddToCart/{id}',[
+	'as' => 'addtocart',
+	'uses' => 'PageController@AddToCart'
+]);
+
+Route::get('DeleteOneProductToCart/{id}',[
+	'as' => 'DeleteOneProductToCart',
+	'uses' => 'PageController@DeleteOneProductToCart'
+]);
+
+Route::get('ShoppingCart',[
+	'as' => 'ShoppingCart',
+	'uses' => 'PageController@ShoppingCart'
+]);
+
+Route::get('deletesession',[
+	'as' => 'deletesession',
+	'uses' => 'PageController@DeleteSession'
+]);
+
+
+// Route::get('',[
+// 	'as' => '',
+// 	'uses' => ''
+// ]);

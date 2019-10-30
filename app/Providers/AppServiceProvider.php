@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\TypeProductViewModel;
+use App\Cart;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,17 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        view()->composer('blade.header',function($view){
+            $typeProducts = TypeProductViewModel::all();
+            $view->with('typeProducts',$typeProducts);
+        });
+        view()->composer('blade.header',function($view){
+            if(Session('cart')){
+                $oldCart = Session::get('cart');
+                $cart = new Cart($oldCart);
+                $view->with('cart',$cart);
+            }
+        });
     }
 
     /**
