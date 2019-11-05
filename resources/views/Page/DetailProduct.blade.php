@@ -1,4 +1,4 @@
-@extends('blade.master')
+@extends('Blade.master')
 @section('title','Chi tiết sản phẩm')
 @section('content')
 <div class="inner-header">

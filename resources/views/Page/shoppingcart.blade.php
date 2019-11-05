@@ -1,4 +1,4 @@
-@extends('blade.master')
+@extends('Blade.master')
 @section('title','Thanh toán sản phẩm')
 @section('script')
 <script src="assets/dest/js/cart-js.js"></script>
@@ -17,42 +17,45 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	
+	@if(Auth::check())
+		<input type="hidden" id="Auth" data-auth="1" data-fullname="{{ Auth::user()->full_name }}" data-email="{{ Auth::user()->email }}" data-address="{{ Auth::user()->address }}" data-phone="{{ Auth::user()->phone }}">
+	@else
+		<input type="hidden" id="Auth" data-auth="0">
+	@endif
 	<div class="container">
 		<div id="content">
-			
 			<form class="beta-form-checkout" id='formcheckout' action="{{ route('CheckOutRequest') }}" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Đặt hàng</h4>
 						<div class="space20">&nbsp;</div>
-
 						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_name">
 							<label for="name">Họ tên</label>
 							<input type="text" class=" col-lg-12 col-md-12 col-sm-12" id="name" name="name" placeholder="Họ và tên">
 						</div>
 						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0">
 							<label>Giới tính </label>
-							<input id="gender" type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-							<input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
-										
+							<div class="col-lg-12 col-md-12 col-sm-12 p-0 m-0">
+								<input id="gendermale" type="radio" class="input-radio" name="gender" value="1" checked="checked"><span class="pr-3">Nam</span>
+								<input id="genderfemale" type="radio" class="input-radio" name="gender" value="0"><span>Nữ</span>
+							</div>		
 						</div>
 
 						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_email">
 							<label for="email">Email</label>
-							<input type="email" id="email" class=" col-lg-12 col-md-12 col-sm-12 " placeholder="expample@gmail.com">
+							<input type="email" id="email" name="email" class=" col-lg-12 col-md-12 col-sm-12 " placeholder="expample@gmail.com">
 						</div>
 
 						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_adress">
 							<label for="adress">Địa chỉ</label>
-							<input type="text" id="adress" class=" col-lg-12 col-md-12 col-sm-12 " placeholder="Địa chỉ nhận hàng" >
+							<input type="text" id="adress" name="adress" class="col-lg-12 col-md-12 col-sm-12 " placeholder="Địa chỉ nhận hàng" >
 						</div>
 						
 
 						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0" id="group_phone">
 							<label for="phone">Điện thoại</label>
-							<input type="text" class=" col-lg-12 col-md-12 col-sm-12 " id="phone" >
+							<input type="text" class=" col-lg-12 col-md-12 col-sm-12 " id="phone" name="phone">
 						</div>
 						
 						<div class="form-block col-lg-12 col-md-12 col-sm-12 mb-0">
@@ -107,8 +110,8 @@
 										<div class="payment_box payment_method_cheque" style="display: none;">
 											Chuyển tiền đến tài khoản sau:
 											<br>- Số tài khoản: 123 456 789
-											<br>- Chủ TK: Nguyễn A
-											<br>- Ngân hàng ACB, Chi nhánh TPHCM
+											<br>- Chủ TK: Vũ Thái Kiệt
+											<br>- Ngân hàng VCB, Chi nhánh bắc sài gòn
 										</div>						
 									</li>
 									

@@ -1,39 +1,22 @@
-
-
-$(document).ready(function ($) {
-	if($('#Auth').data('auth') == 1){
-		$('#name').val($('#Auth').data('fullname'));
-		$('#email').val($('#Auth').data('email'));
-		$('#adress').val($('#Auth').data('address'));
-		$('#phone').val($('#Auth').data('phone'))
-	}
-	var maxAttribute = 4;
+$(document).ready(function($){
+	var maxAttribute = 2;
 	$.ajaxSetup({
 	    headers: {
 	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	    }
 	});
+	
+	$(document).on('click','#btnLogin',function(){
 
-	$(document).on('click','#BtnCheckOut',function(){
-
-		var name = $('#name').val();
 		var email = $('#email').val();
-		var adress = $('#adress').val();
-		var gender = $('input[name=gender]:checked').val();
-		var phone = $('#phone').val();
-		var notes = $('#notes').val();
-		var payment = $('input[name=payment_method]:checked').val();
+		var password =  $('#password').val();
+		
 
 		var data = {
-			name: name,
-			gender: gender,
 			email: email,
-			adress: adress,
-			phone: phone,
-			notes: notes,
-			payment: payment,
+			password: password,
 		};
-		var url = location.origin + "/CheckOutRequest";
+		var url = location.origin + "/LoginRequest";
 		$.ajax({
 			url: url,
 			type: 'POST',
@@ -50,14 +33,19 @@ $(document).ready(function ($) {
 					for(i = 1; i <= maxAttribute; i++){
 						 RemoveValidate('validate_'+i);
 					}
-					// Validate = true;
 					$.ajax({
-						url: location.origin + "/AddCartInDB",
+						url: location.origin + "/CheckLogin",
 						type: 'POST',
 						data: data,
-						success:function(){
-							toastr['success']('Bạn đã đặt hàng thành công');
-							window.open(location.origin,'_self');
+						success:function(reponse){
+							if(reponse == 1)
+							{
+								toastr['success']('Bạn đã đăng nhập thành công');
+								window.open(location.origin,'_self');
+							}
+							else{
+								toastr['warning']('Tài khoản hoặc mật khẩu không trùng khớp!');
+							}
 						},
 						error: function(req, err){
 							console.log(req,err);
@@ -70,9 +58,8 @@ $(document).ready(function ($) {
 			}
 
 		});
-		
-		
 	});
+
 	function Validate(errors){
 		var stt = 0;
 		var i = 1;
@@ -82,10 +69,8 @@ $(document).ready(function ($) {
 		$.each(errors, function(index, val) {
 			var attribute = '';
 			stt++;
-			if(index == 'name') attribute = "họ và tên" ;
 			if(index == 'email') attribute = "email" ;
-			if(index == 'adress') attribute = "địa chỉ" ;
-			if(index == 'phone') attribute = "đúng số điện thoại" ;
+			if(index == 'password') attribute = "mật khẩu 6 - 25 kí tự" ;
 			
 			AddValidate('group_'+index,'validate_'+stt,'Vui lòng nhập ' + attribute + ' !');
 		});
@@ -96,5 +81,22 @@ $(document).ready(function ($) {
 	}
 	function RemoveValidate(validateID) {
 	    $('#' + validateID).remove();
+	}
+	toastr.options = {
+	  "closeButton": false,
+	  "debug": false,
+	  "newestOnTop": true,
+	  "progressBar": false,
+	  "positionClass": "toast-bottom-right",
+	  "preventDuplicates": true,
+	  "onclick": null,
+	  "showDuration": "300",
+	  "hideDuration": "1000",
+	  "timeOut": "5000",
+	  "extendedTimeOut": "1000",
+	  "showEasing": "swing",
+	  "hideEasing": "linear",
+	  "showMethod": "fadeIn",
+	  "hideMethod": "fadeOut"
 	}
 });

@@ -1,43 +1,33 @@
-
-
-$(document).ready(function ($) {
-	if($('#Auth').data('auth') == 1){
-		$('#name').val($('#Auth').data('fullname'));
-		$('#email').val($('#Auth').data('email'));
-		$('#adress').val($('#Auth').data('address'));
-		$('#phone').val($('#Auth').data('phone'))
-	}
-	var maxAttribute = 4;
+$(document).ready(function($){
+	var maxAttribute = 5;
 	$.ajaxSetup({
 	    headers: {
 	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	    }
 	});
-
-	$(document).on('click','#BtnCheckOut',function(){
+	
+	$(document).on('click','#btnRegister',function(){
 
 		var name = $('#name').val();
 		var email = $('#email').val();
 		var adress = $('#adress').val();
-		var gender = $('input[name=gender]:checked').val();
+		var password =  $('#password').val();
 		var phone = $('#phone').val();
-		var notes = $('#notes').val();
-		var payment = $('input[name=payment_method]:checked').val();
 
 		var data = {
 			name: name,
-			gender: gender,
 			email: email,
 			adress: adress,
 			phone: phone,
-			notes: notes,
-			payment: payment,
+			phonecheck: parseInt(phone),
+			password: password,
 		};
-		var url = location.origin + "/CheckOutRequest";
+		var url = location.origin + "/CheckRequestRegister";
 		$.ajax({
 			url: url,
 			type: 'POST',
 			data: data,
+
 			success: function(response){
 				var errors = response['error'];
 				if(errors.length != 0){
@@ -50,16 +40,22 @@ $(document).ready(function ($) {
 					for(i = 1; i <= maxAttribute; i++){
 						 RemoveValidate('validate_'+i);
 					}
-					// Validate = true;
 					$.ajax({
-						url: location.origin + "/AddCartInDB",
+						url: location.origin + "/InsertUser",
 						type: 'POST',
 						data: data,
 						success:function(){
-							toastr['success']('Bạn đã đặt hàng thành công');
+							toastr['success']('Bạn đã đăng ký thành công');
 							window.open(location.origin,'_self');
 						},
 						error: function(req, err){
+							var error = req['responseJSON']['message'];
+							var suberror = error.substring(0,15);
+							if(suberror == "SQLSTATE[23000]")
+							{
+								toastr['error']('Email đã được sử dụng!');
+							}
+							// if(req['responseJSON']['message'])
 							console.log(req,err);
 						}
 					});
@@ -70,9 +66,8 @@ $(document).ready(function ($) {
 			}
 
 		});
-		
-		
 	});
+
 	function Validate(errors){
 		var stt = 0;
 		var i = 1;
@@ -86,6 +81,7 @@ $(document).ready(function ($) {
 			if(index == 'email') attribute = "email" ;
 			if(index == 'adress') attribute = "địa chỉ" ;
 			if(index == 'phone') attribute = "đúng số điện thoại" ;
+			if(index == 'password') attribute = "mật khẩu 6 - 25 kí tự" ;
 			
 			AddValidate('group_'+index,'validate_'+stt,'Vui lòng nhập ' + attribute + ' !');
 		});
@@ -96,5 +92,22 @@ $(document).ready(function ($) {
 	}
 	function RemoveValidate(validateID) {
 	    $('#' + validateID).remove();
+	}
+	toastr.options = {
+	  "closeButton": false,
+	  "debug": false,
+	  "newestOnTop": true,
+	  "progressBar": false,
+	  "positionClass": "toast-bottom-right",
+	  "preventDuplicates": true,
+	  "onclick": null,
+	  "showDuration": "300",
+	  "hideDuration": "1000",
+	  "timeOut": "5000",
+	  "extendedTimeOut": "1000",
+	  "showEasing": "swing",
+	  "hideEasing": "linear",
+	  "showMethod": "fadeIn",
+	  "hideMethod": "fadeOut"
 	}
 });

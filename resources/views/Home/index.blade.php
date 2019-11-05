@@ -1,4 +1,4 @@
-@extends('blade.master')
+@extends('Blade.master')
 @section('title','Trang chủ')
 @section('content')
 <div class="rev-slider">

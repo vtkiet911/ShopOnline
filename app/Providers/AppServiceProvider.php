@@ -17,11 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        view()->composer('blade.header',function($view){
+        view()->composer('Blade.header',function($view){
             $typeProducts = TypeProductViewModel::all();
             $view->with('typeProducts',$typeProducts);
         });
-        view()->composer('blade.header',function($view){
+        view()->composer('Blade.header',function($view){
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);

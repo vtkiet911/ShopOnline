@@ -20,6 +20,6 @@ class SlideController extends Controller
 		#region function
 
 		#endregion
-		return view('home.index',compact('slides','newProducts','promotionProducts'));
+		return view('Home.index',compact('slides','newProducts','promotionProducts'));
 	}
 }

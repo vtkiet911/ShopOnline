@@ -22,16 +22,15 @@
 	</head>
 	<body>
 
-		@include('blade.header')
+		@include('Blade.header')
 
 		@yield('content')
 
-		@include('blade.footer')
+		@include('Blade.footer')
 
 		<!-- include js files -->
 		<script src="assets/dest/js/jquery.js"></script>
 		<script src="assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
       	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
       	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 		<script src="assets/dest/vendors/bxslider/jquery.bxslider.min.js"></script>
@@ -47,7 +46,6 @@
 		
 		<!--customjs-->
 		@yield('script')
-		<script src="assets/dest/js/custom-validate.js"></script>
 		<script src="assets/dest/js/custom2.js"></script>
 		<script src="assets/dest/js/toastr.min.js"></script>
 		<script>

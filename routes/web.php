@@ -21,6 +21,41 @@ Route::get('', [
 	'uses' => 'SlideController@index'
 ]);
 
+Route::get('/register', [
+	'as' => 'register',
+	'uses' => 'PageController@ViewRegister'
+]);
+
+Route::get('login', [
+	'as' => 'login',
+	'uses' => 'PageController@ViewLogin'
+]);
+
+Route::get('logout', [
+	'as' => 'logout',
+	'uses' => 'PageController@LogOut'
+]);
+
+Route::post('/CheckRequestRegister', [
+	'as' => 'CheckRequestRegister',
+	'uses' => 'PageController@CheckRequestRegister'
+]);
+
+Route::post('CheckLogin', [
+	'as' => 'CheckLogin',
+	'uses' => 'PageController@Login'
+]);
+
+Route::post('/LoginRequest', [
+	'as' => 'LoginRequest',
+	'uses' => 'PageController@LoginRequest'
+]);
+
+Route::post('/InsertUser', [
+	'as' => 'InsertUser',
+	'uses' => 'PageController@InsertUser'
+]);
+	
 Route::get('/typeproduct/{id}',[
 	'as' => 'typeproduct',
 	'uses' => 'TypeProductController@GetTypeProducts'
@@ -56,10 +91,14 @@ Route::post('CheckOutRequest',[
 	'uses' => 'PageController@CheckOutRequest'
 ]);
 
+Route::post('AddCartInDB',[
+	'as' => 'AddCartInDB',
+	'uses' => 'PageController@AddCartInDB'
+]);
 
-Route::get('deletesession',[
-	'as' => 'deletesession',
-	'uses' => 'PageController@DeleteSession'
+Route::get('searchproduct',[
+	'as' => 'SearchProduct',
+	'uses' => 'PageController@SearchProduct'
 ]);
 
 
